@@ -58,7 +58,7 @@ func main() {
 		}(i)
 	}
 
-	// 1 - writer go-routine
+	// 1 - cache refresh go-routine
 	wg.Add(1)
 	go func() {
 		defer wg.Done()
