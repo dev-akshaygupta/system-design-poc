@@ -1,13 +1,11 @@
 package main
 
 import (
-	"sync"
 	"sync/atomic"
 	"time"
 )
 
 type RateLimiter struct {
-	mu      sync.RWMutex
 	counter atomic.Int64
 	limit   int64
 }
