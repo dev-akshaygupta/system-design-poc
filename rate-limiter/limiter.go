@@ -61,6 +61,7 @@ func (rlm *RateLimiterWithMutex) AllowWithMutex() bool {
 	rlm.mu.Lock()
 	rlm.counter++
 	if rlm.counter <= rlm.limit {
+		rlm.mu.Unlock()
 		return true
 	}
 	rlm.mu.Unlock()
@@ -69,8 +70,8 @@ func (rlm *RateLimiterWithMutex) AllowWithMutex() bool {
 
 func (rlm *RateLimiterWithMutex) ResetWithMutex() {
 	rlm.mu.Lock()
-	defer rlm.mu.Unlock()
 	rlm.counter = 0
+	rlm.mu.Unlock()
 }
 
 func (rlm *RateLimiterWithMutex) StartResetTickerWithMutex(done <-chan struct{}) {
